@@ -16,6 +16,10 @@ app.MapGet("/shirts", () =>
     return "Reading all the shirts";
 });
 
+app.MapGet("/shirts/{id}", (int id) =>
+{
+    return $"Reading the shift Id: {id}";
+});
 
 app.Run();
 

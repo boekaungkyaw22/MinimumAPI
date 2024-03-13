@@ -18,16 +18,21 @@ namespace MinimumAPI.Controllers
 
 
         [HttpGet]
-        public string GetShirts()
+        public List<Shirts> GetShirts()
         {
-            return "Reading all Shirts";
+            return shirts.ToList(); 
         }
 
         [HttpGet("{id}")]
         //public string GetShirtsById (int id,[FromHeader(Name = "Color")] string color) Using Header
-        public string GetShirtsById (int id,[FromHeader(Name = "Color")] string color)
+        public IActionResult GetShirtsById(int id)
         {
-            return $"Reading Shirts Id:{id} and color: {color}";
+            var shirt = shirts.FirstOrDefault(x => x.ShirtId == id);
+            if (shirt == null)
+            {
+                return NotFound();
+            }
+            return Ok(shirt);
         }
 
         [HttpPost]
